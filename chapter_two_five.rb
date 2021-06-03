@@ -85,3 +85,66 @@ if 条件A
   #条件Aが真だった場合の処理
 end
 
+#ex 与えられた数値が10より大きいかどうかで処理を変える
+n = 11
+if n > 10
+  puts '10より大きい'
+else
+  puts '10以下'
+end
+
+#ex 国によって挨拶を変える処理
+country = 'italy'
+if country == 'japan'
+  puts 'こんにちは'
+elsif country == 'us'
+  puts 'Hello'
+elsif country == 'italy'
+  puts 'ciao'
+else
+  puts '???'
+end
+#今回は「puts」で文言を出力したが、Rubyのif文は最後に評価された式を戻り値として返す。
+#「if文が戻り値を返す」という性質を利用して、次のようなif文の戻り値を変数に代入できる。
+country = 'italy'
+#if文の戻り値を変数に代入する
+greeting =
+  if country == 'japan'
+    puts 'こんにちは'
+  elsif country == 'us'
+    puts 'Hello'
+  elsif country == 'italy'
+    puts 'ciao'
+  end
+  #戻り値が入ったもの
+  puts greeting
+#Rubyのif文が修飾子として文の後ろに置くことができる。if修飾子は後置ifと呼ばれることもある。
+
+#ex 毎月１日だけポイント５倍にしたい場合のコード(普通にif文を書く場合)
+point = 7
+day = 1
+# １日であればポイント５倍
+if day == 1
+  point *= 5
+end
+#戻り値が入ったもの
+puts point
+
+#「if」と「elsif」の後ろには「then」を入れると次の条件式とその条件が真だった場合の処理を１行に押し込めることができる。
+# ==> しかし、使用頻度はあまり高くない。
+if 条件A then
+  # 条件Aが真だった場合の処理
+elsif 条件B then
+  # 条件Bが真だった場合の処理
+else
+  #それ以外の条件の処理
+end
+
+#ex １行に押し込める
+country = 'italy'
+if country == 'japan' then puts 'こんにちは'
+elsif country == 'us' then puts 'Hello'
+elsif country == 'italy' then puts 'ciao'
+else puts'???'
+end
+#Rubyの条件分岐には、if文以外にも「unless」や「case」,「when」がある。（これらの機能については後述。）
