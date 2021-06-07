@@ -81,4 +81,152 @@ def greeting(country)
     puts 'hello'
   end
 end
-______
+
+puts greeting(nil)
+puts greeting('japan')
+puts greeting('italy')
+
+#[2.10.3]unless文
+#Rubyにはif文の反対の意味を持つ「unless」がある。
+#何が反対かというと、条件式が偽になった場合にだけ処理を実行するという点で差異がある。
+
+#EX if文で否定の条件を書いているときはunless文に書き換えられる。
+  #if文
+  status = 'error'
+  if status != 'ok'
+    puts '何か異常があります。'
+  end
+
+  #unless文へ書き換え
+  status = 'error'
+  unless status == 'ok'
+    puts '何か異常があります。'
+  end
+
+  #elseを使って条件が正常だった場合の処理も書ける
+  status = "error"
+  unless status == 'ok'
+    puts '何か異常があります。'
+  else
+    puts '正常です。'
+  end
+  # => ただし、if文の「elsif」に相当するものは存在しない！
+
+#unlessはifと同様、unlessの戻り値を直接変数に代入したり、修飾子として文の後ろに置いたりできる。
+#EX unlessの結果を変数に代入する
+status = 'error'
+message =
+  unless status == 'ok'
+    puts '何か異常があります。'
+  else
+    puts '正常です。'
+  end
+
+#EX unlessを修飾子として使う
+status = 'error'
+puts '何か異常があります。'unless status == "ok"
+
+#thenを入れることができる点もif文と同じ
+status = 'error'
+unless status == 'ok' then
+  puts '何か異常があります。'
+end
+
+#「if + 否定条件」は「unless + 肯定条件」に書き換えができるものの、必ずしも書き直さなければいけないわけではない。
+#if文の方が読みやすいと思った場合は、「if + 否定条件」のままにして置いて大丈夫！
+status = 'error'
+if status != 'ok'
+  puts '何か異常があります。'
+end
+
+#[2.10.4]case文
+#複数の条件を指定する場合は、elsifを重ねるよりも「case文」で書いた方がシンプルになる。
+case 対象のオブジェクトや式
+when 値１
+  #値１に一致する場合の処理
+when 値２
+  #値２に一致する場合の処理
+when 値３
+  #値３に一致する場合の処理
+else
+  #どれとも一致しない処理
+end
+
+#EX [2.5.3]if文の説明で使用したサンプルコードをcase文に書き換える
+  #if文
+    country = 'italy'
+    if country == 'japan'
+      puts 'こんにちは'
+    elsif country == 'us'
+      puts 'Hello'
+    elsif country == 'italy'
+      puts 'ciao'
+    else
+      puts '???'
+    end
+
+  #case文
+    country = 'italy'
+    case country
+    when 'japan'
+      puts 'こんにちは'
+    when 'us'
+      puts 'Hello'
+    when 'italy'
+      puts 'ciao'
+    else
+      puts '???'
+    end
+
+#Rubyのcase文ではwhen節を使って複数の値を指定し、どれかに一致すれば処理を実行する、という条件分岐を書ける。
+country = 'アメリカ'
+case country
+when 'japan', '日本'
+  puts 'こんにちは'
+when 'us', 'アメリカ'
+  puts 'Hello'
+when 'italy', 'イタリア'
+  puts 'ciao'
+else
+  puts '???'
+end
+
+#if文と同様、case文も最後に評価された式を戻り値として返すため、case文の結果を変数に入れることが可能。
+country = 'italy'
+message =
+  case country
+  when 'japan'
+    puts 'こんにちは'
+  when 'us'
+    puts 'Hello'
+  when 'italy'
+    puts 'ciao'
+  else
+    puts '???'
+  end
+  puts message
+
+#when節の後ろにはthenを入れられ、when節とその条件が真だった場合の処理を1行で書くことができる。(使用頻度少なめ)
+country = 'italy'
+case country
+when 'japan' then puts 'こんにちは'
+when 'us' then puts 'Hello'
+when 'italy' then puts 'ciao'
+else puts '???'
+end
+
+#[2.10.5]条件演算子(三項演算子)
+#RubyではC言語と同じような「?」を使った条件分岐(三項演算子)を使うことができる。
+#EX [2.5.3]if文の説明で使用したサンプルコード
+  n = 11
+  if n > 10
+    puts '10より大きい'
+  else
+    puts '10以下'
+  end
+
+  #条件演算子に書き換え
+  n = 11
+  n > 10 ? '10よりも大きい' : '10以下'
+
+#シンプルなif/else文であれば、条件演算子を使った方がスッキリ書ける場合がある。逆に複雑な条件文だったりするとかえって読みづらくなってしまう場合があるので可動性を意識して使う必要がある。
