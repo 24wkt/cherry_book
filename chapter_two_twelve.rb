@@ -175,3 +175,19 @@ load './sample.rb'  # ==> true
 #requireはRubyを実行しているディレクトリがパスの起点になるが、require_ralativeを使うと自分のファイルが存在するディレクトリがパスの起点になる。
 
 # EX 次のようにファイルが配置されている場合
+  ・
+  |-- foo/
+  |    L hello.rb
+  |-- bar/
+       L bye.rb
+  #foo/hello.rbを読み込みたい場合はrequire_relativeを使って次のように書ける
+  require_relative '../bar/bye'
+
+#Rubyの実行ディレクトリの影響を受けずにプログラミングを読み込みたい場合はrequire_relativeの利用を検討すると良い
+
+#[2.12.10]putsメソッド、printメソッド、pメソッド
+
+#メソッド　出力後の改行　　　　配列の表示　　　　呼び出すメソッド　　　　　　戻り値　　　　　対象者
+# puts      あり         要素ごとに改行          to_s       　　　　　nil       一般ユーザー
+# print     なし　　　　　 　改行しない　          to_s               nil       一般ユーザー
+#   p       あり           改行しない　          to_s               nil         開発者
