@@ -43,3 +43,46 @@
 #     ここではMinitestが提供する「assert_equalメソッド」を使って「'ruby'.upcase」の実行結果が「'RUBY'」になっていると検証しています。
 #     「assert_equalメソッド」は次のように使います。引数を渡す順番に気をつけましょう！
 #　EX  assert_equal 期待する結果, テスト対象になる値や式
+
+#[3.2.2]本書で使用するMinitestの検証メソッド
+#Minitestには様々な検証メソッドが用意されていますが、本書で使うのは次の3つだけ。
+
+assert_equal b, a  # ==> aがbと等しければパス
+assert a           # ==> aが真であればパス
+refute a           # ==> aが偽であればパス
+
+#[3.2.3]テストコードの実行と結果の確認
+#テストコードが書けたら次は実行です。といっても、普通のRubyファイルと実行方法は同じです。
+
+# EX chapter_three_two_sample_test.rbを実行する場合
+
+  $ ruby chapter_three_two_sample_test.rb
+
+  $ ruby chapter_three_two_sample_test.rb
+  Run options: --seed 15375
+
+  # Running:
+
+  .
+
+  Finished in 0.000685s, 1459.8540 runs/s, 1459.8540 assertions/s.
+
+  1 runs, 1 assertions, 0 failures, 0 errors, 0 skips
+  ryotaono@onoyuufutoshinoMacBook-Air cherry_book % 
+
+#「Run options: --seed 15375」はテストの実行順序をシャッフルする際に使用したシード値を示していますが、ここでは特に気にしなくてOK
+#「# Running:」の下に生じされている「.(ドット)」がテストの進捗状況です。今回は一つしかないのでドットは一つしか表示されません。
+#「Finished in 0.000685s, 1459.8540 runs/s, 1459.8540 assertions/s.」はテストの実行スピードを表示しています。
+#各値が表している内容は次の通り
+  Finished in 0.000685s     # ==> テスト実行にかかった秒数
+  1459.8540 runs/s          # ==> 1秒間に実行できるであろうメソッドの件数
+  1459.8540 assertions/s.   # ==> 1秒間に実行できるであろう検証メソッドの件数
+
+#最後の行がテストの実行結果のまとめです。それぞれ次の内容を表しています。
+  1 runs          # ==> 実行したテストメソッドの件数
+  1 assertions    # ==> 実行した検証メソッドの件数
+  0 failures      # ==> 検証に失敗したメソッドのテストメソッドの件数
+  0 errors        # ==> 検証中にエラーが発生したテストメソッドの件数
+  0 skips　       # ==> skipメソッドにより実行をスキップされたテストメソッドの件数
+
+#「failures」と「errors」の件数がどちらも０であればテストは全てパスしたことになります！
