@@ -68,7 +68,6 @@ refute a           # ==> aが偽であればパス
   Finished in 0.000685s, 1459.8540 runs/s, 1459.8540 assertions/s.
 
   1 runs, 1 assertions, 0 failures, 0 errors, 0 skips
-  ryotaono@onoyuufutoshinoMacBook-Air cherry_book % 
 
 #「Run options: --seed 15375」はテストの実行順序をシャッフルする際に使用したシード値を示していますが、ここでは特に気にしなくてOK
 #「# Running:」の下に生じされている「.(ドット)」がテストの進捗状況です。今回は一つしかないのでドットは一つしか表示されません。
@@ -86,3 +85,39 @@ refute a           # ==> aが偽であればパス
   0 skips　       # ==> skipメソッドにより実行をスキップされたテストメソッドの件数
 
 #「failures」と「errors」の件数がどちらも０であればテストは全てパスしたことになります！
+
+#[3.2.4]テストが失敗した場合の実験結果
+#テストが失敗する場合の実行結果を見てみましょう。
+
+# EX わざと「captializeメソッド(最初の1文字をお思い時にするメソッド)」を呼ぶ
+  $ ruby chapter_three_two_test_error_sample.rb
+
+  Run options: --seed 11395
+
+  # Running:
+
+  F
+
+  Finished in 0.011959s, 83.6190 runs/s, 83.6190 assertions/s.
+
+    1) Failure:
+  SampleTest#test_sample [/Users/ryotaono/Desktop/cherry_book/tempCodeRunnerFile.rb:5]:
+  --- expected
+  +++ actual
+  @@ -1,2 +1,2 @@
+  # encoding: UTF-8
+  -"RUBY"
+  +"Ruby"
+
+
+  1 runs, 1 assertions, 1 failures, 0 errors, 0 skips
+
+  #まず、進捗状況にドッド(.)ではなく、失敗(Falure)のFが表示されます。それから、どのテストのどこでどのように失敗したのかという詳細な情報が表示されます。
+  
+  1) Failure:   # <== 実行結果が失敗
+  SampleTest#test_sample [/Users/ryotaono/Desktop/cherry_book/tempCodeRunnerFile.rb:5]:   # <== SampleTestクラスのtest_sampleメソッド(sample_test.rbの5行目で失敗した)
+  --- expected   # <== 期待した結果
+  +++ actual     # <== 実際の結果
+
+  #最後に表示される実行結果のまとめでも「1 failures」と1件のテストが失敗したことを報告しています。
+  #また、テストが失敗するとそのテストメソッドはそれ以上実行されません。実行対象のテストメソッドが複数あった場合は次のテストメソッドの実行に移ります。
