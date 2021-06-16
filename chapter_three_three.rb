@@ -155,3 +155,25 @@ FizzBuzzTest#test_fizz_buzz [/Users/ryotaono/Documents/programming/cherry_book/t
 
 # ==> 「-FizzBuzz」が期待した結果で「+"16"」が実際の結果です。
 #      なので値が異なっているよ、と表示されています。
+
+#[3.3.2]プログラムと本体を分離する
+#今の状態だとテスト対象のプログラムとテストコードが1つのファイルに結合してしまっています。
+#本来であればプログラム本体とテストコードは分離して別々のファイルとして管理すべきです。
+
+#テストコードを分離してテストを実行するといかのようになります。
+
+# 〜〜省略〜〜
+
+1) Error:
+FizzBuzzTest#test_fizz_buzz:
+NoMethodError: undefined method `fizz_buzz' for #<FizzBuzzTest:0x00007f9e49886a00>
+    /Users/ryotaono/Documents/programming/cherry_book/tempCodeRunnerFile.rb:5:in `test_fizz_buzz'
+
+1 runs, 0 assertions, 0 failures, 1 errors, 0 skips
+
+# ==> 「NoMethodError: undefined method `fizz_buzz'」と定義されていないメソッドが呼び出されている。
+#      つまり、分離したもとのFizzBuzz.rbを見つけられていないのです。
+
+
+#他のファイルを読み込むときは「requireメソッド」を用いることでそのファイルに任意のファイルを参照させることができます。
+#テストコードに「require '読み込ませたいファイルの場所'」を付け足して実行してみましょう！
